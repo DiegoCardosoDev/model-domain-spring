@@ -10,14 +10,13 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/client")
+@RequestMapping(value = "/products")
 public class ClientController {
 
     private ClientService clientService;
 
     @GetMapping
     public ResponseEntity<List<Client>> findAll(){
-
         List<Client> list = clientService.findAll();
         return ResponseEntity.ok().body(list);
     }
