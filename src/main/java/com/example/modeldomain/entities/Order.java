@@ -33,13 +33,6 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> items = new ArrayList<>();
 
-    public Double getTotal(){
-        double sum = 0.0;
-        for (OrderItem item : items){
-            sum = sum + item.getSubTotal();
-        }
-        return  sum;
-    }
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -53,6 +46,15 @@ public class Order {
         this.total = total;
         this.client = client;
     }
+
+    public Double getTotal(){
+        double sum = 0.0;
+        for (OrderItem item : items){
+            sum = sum + item.getSubTotal();
+        }
+        return  sum;
+    }
+
 
 
 }

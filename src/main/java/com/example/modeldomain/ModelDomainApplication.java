@@ -53,7 +53,9 @@ public class ModelDomainApplication implements CommandLineRunner {
         orderRepository.saveAll(Arrays.asList(o1,o2));
 
         OrderItem item1 = new OrderItem(null,1, 1000.0,p1,o1);
-        OrderItem item2 = new OrderItem(null,1, 40.0,p2,o2);
+        OrderItem item2 = new OrderItem(null,2, 40.0,p2,o1);
+        OrderItem item3 = new OrderItem(null,1, 40.0,p2,o2);
+        OrderItem item4 = new OrderItem(null,1, 1000.0,p3,o2);
 
         ordemItemRepository.saveAll(Arrays.asList(item1,item2));
 

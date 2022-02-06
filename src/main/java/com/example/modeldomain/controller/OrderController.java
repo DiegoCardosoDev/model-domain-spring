@@ -1,8 +1,10 @@
 package com.example.modeldomain.controller;
 
+import com.example.modeldomain.dto.OrderDTO;
 import com.example.modeldomain.entities.Order;
 import com.example.modeldomain.services.OrderService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
@@ -18,12 +21,14 @@ public class OrderController {
 
 
     private OrderService orderService;
+    private ModelMapper mapper;
 
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAll(){
-        List<Order> list = orderService.findAll();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<List<OrderDTO>> findAll() {
+        return ResponseEntity.ok()
+                .body(orderService.findAll().stream().map(x -> mapper.map(x, OrderDTO.class)).collect(Collectors.toList()));
+
     }
 
 
