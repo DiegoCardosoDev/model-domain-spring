@@ -2,8 +2,10 @@ package com.example.modeldomain;
 
 import com.example.modeldomain.entities.Client;
 import com.example.modeldomain.entities.Order;
+import com.example.modeldomain.entities.OrderItem;
 import com.example.modeldomain.entities.Product;
 import com.example.modeldomain.repositories.ClientRepository;
+import com.example.modeldomain.repositories.OrdemItemRepository;
 import com.example.modeldomain.repositories.OrderRepository;
 import com.example.modeldomain.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ public class ModelDomainApplication implements CommandLineRunner {
     private ClientRepository clientRepository;
     private ProductRepository productRepository;
     private OrderRepository orderRepository;
+    private OrdemItemRepository ordemItemRepository;
 
 
     public static void main(String[] args) {
@@ -48,6 +51,12 @@ public class ModelDomainApplication implements CommandLineRunner {
         Order o2 = new Order(null, Instant.parse("2022-02-05T11:25:09Z"), OrderStatus.WAYTING, client1);
 
         orderRepository.saveAll(Arrays.asList(o1,o2));
+
+        OrderItem item1 = new OrderItem(null,1, 1000.0,p1,o1);
+        OrderItem item2 = new OrderItem(null,1, 40.0,p2,o2);
+
+        ordemItemRepository.saveAll(Arrays.asList(item1,item2));
+
 
 
 

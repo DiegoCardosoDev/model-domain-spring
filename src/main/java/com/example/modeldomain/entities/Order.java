@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -27,6 +29,18 @@ public class Order {
     private OrderStatus status;
     private Double total;
 
+    @Getter
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> items = new ArrayList<>();
+
+    public Double getTotal(){
+        double sum = 0.0;
+        for (OrderItem item : items){
+            sum = sum + item.getSubTotal();
+        }
+        return  sum;
+    }
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
@@ -39,4 +53,6 @@ public class Order {
         this.total = total;
         this.client = client;
     }
+
+
 }
